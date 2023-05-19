@@ -15,3 +15,84 @@ code {
 error{
   color: #ff6774;
 }
+
+#topbar{
+  width: 100%;
+  background-color: #006ec5;
+  height: 65px;
+  position: fixed;
+  z-index: 10;
+}
+
+.topbar-text{
+  color: "#04245c";
+  min-width: 220px;
+  max-width: 220px;
+}
+
+#content {
+  width: 80%;
+  padding: 0;
+  min-height: 100vh;
+  transition: all 0.3s;
+  position: absolute;
+  right: 0;
+}
+
+#sidebar {
+  min-width: 220px;
+  max-width: 220px;
+  color: #fff;
+  transition: all 0.3s;
+  position: fixed;
+  z-index: 0;
+  border-right: 2px solid rgba(0,0,0,.05);
+  height: 200vh;
+  top: 0;
+}
+
+#sidebar .sidebar-items{
+  position: relative;
+  top: 100px;
+}
+
+@media (max-width: 767.98px){
+  #sidebar{
+    min-width: 100%;
+    max-width: 180px;
+    border-right: none;
+    position: relative;
+  }
+}
+
+
+#sidebar h5{
+  color: black;
+}
+
+#sidebar ul li a{
+  color: black;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding: 15px 0;
+  display: block;
+  color: rgba(0,0,0,1);
+  border-bottom: 1px solid rgba(0,0,0,.09);
+}
+
+#sidebar ul li a:hover,#sidebar ul li a:active {
+  color: #0d6efd;
+}
+
+#sidebar ul.components{
+  padding-top: 20px;
+}
+
+#wrapper{
+  position: relative;
+  margin-top: 0;
+  padding-top: 0;
+  top: 70px;
+}
+
+

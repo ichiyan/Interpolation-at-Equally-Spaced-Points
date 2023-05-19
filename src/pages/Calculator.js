@@ -1,8 +1,8 @@
-import {React, useState, Fragment} from "react";
+import {React, useState, Fragment, forwardRef, useRef} from "react";
 import {useForm} from "react-hook-form";
 import Result from "./Result";
 
-const Calculator = () => {
+const Calculator = ({}, ref) => {
 
     const {
         register, 
@@ -11,6 +11,7 @@ const Calculator = () => {
     } = useForm();
 
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const pointsRef = useRef(null);
 
     const onSubmit = (data) => {
         console.log(data);
@@ -19,8 +20,8 @@ const Calculator = () => {
 
     return(
         <Fragment>
-            <div className="container pt-3">
-                <h2>Interpolation at Equally Spaced Points</h2>
+            <div className="container">
+                <h2 ref={ref}>Interpolation at Equally Spaced Points Calculator</h2>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-group pt-3 ">
                         <label htmlFor="initialValue">Initial Value for x</label>
@@ -68,9 +69,10 @@ const Calculator = () => {
                     <button type="submit" className="btn btn-primary mt-3 w-100">Calculate</button>
                 </form>
             </div>
-            {isSubmitted && <Result />}
+            <br></br>
+            {isSubmitted && <Result/>}
         </Fragment>
     )
 }
 
-export default Calculator;
+export default forwardRef(Calculator);

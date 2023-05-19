@@ -1,4 +1,4 @@
-import React from "react";
+import {React, forwardRef} from "react";
 import Graph from "../components/Graph";
 
 const Result = () => {
@@ -6,6 +6,7 @@ const Result = () => {
       <div>
         <div className="container mt-5">
           <hr></hr>
+          <br></br>
           <h5>Points</h5>
           <table className="table text-center table-striped">
             <thead>
@@ -33,6 +34,7 @@ const Result = () => {
 
         <div className="container mt-5">
         <hr></hr>
+        <br></br>
         <h5>Interpolation Table</h5>
         <table className="table text-center table-striped">
           <thead>
@@ -73,18 +75,21 @@ const Result = () => {
 
         <div className="container mt-5">
           <hr></hr>
+          <br></br>
             <h5>Polynomial</h5>
             <p></p>
         </div>
 
         <div className="container mt-5">
           <hr></hr>
+          <br></br>
             <h5>Interpolated y-value at x=</h5>
             <p></p>
         </div>
 
         <div className="container mt-5">
           <hr></hr>
+          <br></br>
           <h5>Graph</h5>
           <Graph/>
         </div>

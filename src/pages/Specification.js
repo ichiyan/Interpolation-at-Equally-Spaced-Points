@@ -1,11 +1,11 @@
-import React from "react";
+import {React, forwardRef} from "react";
 
-const Specification = () => {
+const Specification = ({}, ref) => {
     return(
         <div className="container pt-3">
-            <h2>Specification</h2>
+            <h2 ref={ref}>Specification</h2>
         </div>
     )
 }
 
-export default Specification;
+export default forwardRef(Specification);

@@ -1,11 +1,11 @@
-import React from "react";
+import {React, forwardRef} from "react";
 
-const Conclusion = () => {
+const Conclusion = ({}, ref) => {
     return(
         <div className="container pt-3">
-            <h2>Conclusion</h2>
+            <h2 ref={ref}>Conclusion</h2>
         </div>
     )
 }
 
-export default Conclusion;
+export default forwardRef(Conclusion);

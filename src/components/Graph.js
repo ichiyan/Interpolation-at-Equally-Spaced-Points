@@ -37,7 +37,7 @@ const Graph = () => {
             layout={{autosize: true, xaxis:{title:"x"}, yaxis:{title:"p(x)"}}}
             config={{scrollZoom:true}}
             useResizeHandler
-            style={{width: "70%", height: "60%" }}
+            style={{width: "100%", height: "100%" }}
         />
     )
 }
