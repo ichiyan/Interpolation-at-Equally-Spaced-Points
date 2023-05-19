@@ -11,6 +11,9 @@ const Graph = () => {
         yValues.push(eval(exp));
     }
 
+    var inputXValues = [];
+    var inputYValues = [];
+
     return(
         <Plot
             data={[
@@ -19,15 +22,22 @@ const Graph = () => {
                     y: [2, 6, 3],
                     type: 'scatter',
                     mode: 'markers',
-                    marker: {color: 'red'},
+                    marker: {color: '#ff4716'},
+                    name: "data points"
                 },
                 {
                     x: xValues,
                     y: yValues,
                     mode: 'lines',
+                    marker: {color: '#6495ED'},
+                    name: "interpolation polynomial"
                 },
             ]}
-            layout={{width: 640, height: 480, title: 'A Fancy Plot'}}
+            // layout={{width: 770, height: 510}}
+            layout={{autosize: true, xaxis:{title:"x"}, yaxis:{title:"p(x)"}}}
+            config={{scrollZoom:true}}
+            useResizeHandler
+            style={{width: "70%", height: "60%" }}
         />
     )
 }

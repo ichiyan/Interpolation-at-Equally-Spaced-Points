@@ -1,4 +1,5 @@
 import React from "react";
+import Graph from "../components/Graph";
 
 const Result = () => {
     return(
@@ -85,8 +86,9 @@ const Result = () => {
         <div className="container mt-5">
           <hr></hr>
           <h5>Graph</h5>
-          </div>
+          <Graph/>
         </div>
+      </div>
     )
 }
 
