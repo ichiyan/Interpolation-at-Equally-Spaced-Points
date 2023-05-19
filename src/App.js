@@ -1,24 +1,16 @@
-import logo from './logo.svg';
 import './App.css';
+import Calculator from './pages/Calculator';
+import Topnav from './pages/Topnav';
+import Introduction from './pages/Introduction';
+import Result from './pages/Result';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Topnav />
+      <Calculator />
     </div>
+    
   );
 }
 
