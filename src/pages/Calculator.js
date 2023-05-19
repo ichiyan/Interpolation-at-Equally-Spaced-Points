@@ -11,11 +11,20 @@ const Calculator = ({}, ref) => {
     } = useForm();
 
     const [isSubmitted, setIsSubmitted] = useState(false);
-    const pointsRef = useRef(null);
+    const [initX, setInitX] = useState();
+    const [numX, setNumX] = useState();
+    const [diffX, setDiffX] = useState();
+    const [calculateY, setCalculateY] = useState();
+    const [expression, setExpression] = useState();
 
     const onSubmit = (data) => {
-        console.log(data);
         setIsSubmitted(true);
+        console.log(data)
+        setInitX(data['initX']);
+        setNumX(data['numX']);
+        setDiffX(data['diffX']);
+        setCalculateY(data['calculateY']);
+        setExpression(data['expression']);
     }
 
     return(
@@ -70,7 +79,7 @@ const Calculator = ({}, ref) => {
                 </form>
             </div>
             <br></br>
-            {isSubmitted && <Result/>}
+            {isSubmitted && <Result initX={initX} numX={numX} diffX={diffX} calculateY={calculateY} expression={expression}/>}
         </Fragment>
     )
 }

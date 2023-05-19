@@ -1,7 +1,27 @@
 import {React, forwardRef} from "react";
 import Graph from "../components/Graph";
 
-const Result = () => {
+const Result = ({initX, numX, diffX, calculateY, expression}) => {
+
+
+  var points = [];
+  var column_labels = [];
+  var exp = "Math.sin(x)";
+
+  for (var x = initX, count = 1; count < numX; x += diffX, count++) {
+      points.push({
+        x: x,
+        y: eval(exp)
+      })
+      column_labels.push(count)
+  }
+  points.push({
+    x: x,
+    y: eval(exp)
+  })
+
+  console.log(column_labels)
+
     return(
       <div>
         <div className="container mt-5">
@@ -16,18 +36,14 @@ const Result = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>4</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>-5</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>6</td>
-              </tr>
+              {points.map((point, ndx) => {
+                return (
+                  <tr key={ndx}>
+                    <td>{point.x}</td>
+                    <td>{point.y}</td>
+                  </tr>
+                )
+              })}
             </tbody>
           </table>
         </div>
@@ -39,11 +55,13 @@ const Result = () => {
         <table className="table text-center table-striped">
           <thead>
             <tr >
-              <th scope="col">x</th>
-              <th scope="col">f(x)</th>
-              <th scope="col">f[xi,xi+1]</th>
-              <th scope="col">f[xi,...,xi+2]</th>
-              <th scope="col">f[xi,...,xi+3]</th>
+              <th scope="col">x<sub>i</sub></th>
+              <th scope="col">f<sub>i</sub></th>
+              {
+                column_labels.map((col) => {
+                  return(<th scope="col">&#x25B3;<sup>{col}</sup>f</th>)
+                })
+              }
             </tr>
           </thead>
             <tbody>
@@ -91,7 +109,7 @@ const Result = () => {
           <hr></hr>
           <br></br>
           <h5>Graph</h5>
-          <Graph/>
+          <Graph points={points} numX={numX}/>
         </div>
       </div>
     )

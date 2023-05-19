@@ -23,9 +23,9 @@ function App() {
 
   return (
     <div className="App">
-      <nav class="navbar navbar-light navbar-expand-lg" id='topbar'>
+      <nav className="navbar navbar-light navbar-expand-lg" id='topbar'>
         <div className='container'>
-          <span class="navbar-brand mb-0 h1 fw-bold px-4 topbar-text">Numerical Analysis</span>
+          <span className="navbar-brand mb-0 h1 fw-bold px-4 topbar-text">Numerical Analysis</span>
         </div>
       </nav>
       <br></br>
