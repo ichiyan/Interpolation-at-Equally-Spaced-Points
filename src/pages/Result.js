@@ -1,26 +1,36 @@
 import {React, forwardRef} from "react";
 import Graph from "../components/Graph";
 
-const Result = ({initX, numX, diffX, calculateY, expression}) => {
+const Result = ({data, method}) => {
 
 
   var points = [];
   var column_labels = [];
-  var exp = "Math.sin(x)";
 
-  for (var x = initX, count = 1; count < numX; x += diffX, count++) {
+  // calculator with input function
+  if (method == 1){
+      console.log(data)
+      // change to input expression
+      var exp = "Math.sin(x)";
+
+      for (var x = data['initX'], count = 1; count < data['numX']; x += data['diffX'], count++) {
+          points.push({
+            x: x,
+            y: eval(exp)
+          })
+          column_labels.push(count)
+      }
       points.push({
         x: x,
         y: eval(exp)
       })
-      column_labels.push(count)
-  }
-  points.push({
-    x: x,
-    y: eval(exp)
-  })
+  }else if(method == 2){
+    // calculator with x and y inputs
 
-  console.log(column_labels)
+  }
+
+
+  //calculate y
 
     return(
       <div>
@@ -58,8 +68,8 @@ const Result = ({initX, numX, diffX, calculateY, expression}) => {
               <th scope="col">x<sub>i</sub></th>
               <th scope="col">f<sub>i</sub></th>
               {
-                column_labels.map((col) => {
-                  return(<th scope="col">&#x25B3;<sup>{col}</sup>f</th>)
+                column_labels.map((col, ndx) => {
+                  return(<th key={ndx}  scope="col">&#x25B3;<sup>{col}</sup>f</th>)
                 })
               }
             </tr>
@@ -109,7 +119,7 @@ const Result = ({initX, numX, diffX, calculateY, expression}) => {
           <hr></hr>
           <br></br>
           <h5>Graph</h5>
-          <Graph points={points} numX={numX}/>
+          <Graph points={points}/>
         </div>
       </div>
     )

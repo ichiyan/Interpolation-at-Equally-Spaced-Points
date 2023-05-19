@@ -11,22 +11,20 @@ const Calculator = ({}, ref) => {
     } = useForm();
 
     const [isSubmitted, setIsSubmitted] = useState(false);
-    const [initX, setInitX] = useState();
-    const [numX, setNumX] = useState();
-    const [diffX, setDiffX] = useState();
-    const [calculateY, setCalculateY] = useState();
-    const [expression, setExpression] = useState();
 
-    const onSubmit = (data) => {
+    const [data, setData] = useState();
+    const onSubmit = (inputs) => {
         setIsSubmitted(true);
-        console.log(data)
-        setInitX(data['initX']);
-        setNumX(data['numX']);
-        setDiffX(data['diffX']);
-        setCalculateY(data['calculateY']);
-        setExpression(data['expression']);
+        // add condition if expression existss
+        setData({
+            initX: inputs['initX'],
+            numX: inputs['numX'],
+            diffX: inputs['diffX'],
+            calculateY: inputs['calculateY'],
+            expression: inputs['expression']
+        })
     }
-
+    
     return(
         <Fragment>
             <div className="container">
@@ -59,6 +57,9 @@ const Calculator = ({}, ref) => {
                             {errors.diffX?.type === "pattern" && "x should be a positive or negative number."}
                         </error>
                     </div>
+                    {/* add option here, whether to input function or y values */}
+                    {/* if y values, either a) generate x y table (user inputs y), table no longer shown in result component */}
+                    {/* or b) just list down y values, separated by comma or something */}
                     <div className="form-group pt-3">
                         <label htmlFor="simplifyingExpression">Simplifying Expression (f(x))</label>
                         <input type="" className="form-control" id="differenceValue"
@@ -79,7 +80,7 @@ const Calculator = ({}, ref) => {
                 </form>
             </div>
             <br></br>
-            {isSubmitted && <Result initX={initX} numX={numX} diffX={diffX} calculateY={calculateY} expression={expression}/>}
+            {isSubmitted && <Result data={data} method={1}/>}
         </Fragment>
     )
 }

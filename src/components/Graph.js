@@ -1,7 +1,7 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
 
-const Graph = ({points, numX}) => {
+const Graph = ({points}) => {
 
     // interpolation polynomial
     var exp = "Math.sin(x)";
@@ -14,7 +14,7 @@ const Graph = ({points, numX}) => {
         yValues.push(eval(exp));
     }
 
-    // actual function
+    // input points
     var inputXValues = [];
     var inputYValues = [];
 
