@@ -3,10 +3,10 @@ import React from "react";
 const Result = () => {
     return(
       <div>
-        <div class="container mt-5">
+        <div className="container mt-5">
           <hr></hr>
           <h5>Points</h5>
-          <table class="table text-center table-striped">
+          <table className="table text-center table-striped">
             <thead>
               <tr>
                 <th scope="col">x</th>
@@ -30,10 +30,10 @@ const Result = () => {
           </table>
         </div>
 
-        <div class="container mt-5">
+        <div className="container mt-5">
         <hr></hr>
         <h5>Interpolation Table</h5>
-        <table class="table text-center table-striped">
+        <table className="table text-center table-striped">
           <thead>
             <tr >
               <th scope="col">x</th>
@@ -70,19 +70,19 @@ const Result = () => {
           </table>
         </div>
 
-        <div class="container mt-5">
+        <div className="container mt-5">
           <hr></hr>
             <h5>Polynomial</h5>
             <p></p>
         </div>
 
-        <div class="container mt-5">
+        <div className="container mt-5">
           <hr></hr>
             <h5>Interpolated y-value at x=</h5>
             <p></p>
         </div>
 
-        <div class="container mt-5">
+        <div className="container mt-5">
           <hr></hr>
           <h5>Graph</h5>
           </div>
