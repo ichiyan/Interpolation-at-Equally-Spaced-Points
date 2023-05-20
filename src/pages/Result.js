@@ -13,7 +13,7 @@ const Result = ({data, method}) => {
       // change to input expression
       var exp = "Math.sin(x)";
 
-      for (var x = data['initX'], count = 1; count < data['numX']; x = parseInt(x) + parseInt(data['diffX']), count++) {
+      for (var x = data['initX'], count = 1; count < data['numX']; x += data['diffX'], count++) {
           points.push({
             x: x,
             y: eval(exp)
@@ -26,7 +26,17 @@ const Result = ({data, method}) => {
       })
   }else if(method == 2){
     // calculator with x and y inputs
-
+    for (var x = data['initX'], count = 1; count < data['numX']; x += data['diffX'], count++) {
+      points.push({
+        x: x,
+        y: data['yValues'][count-1]
+      })
+      column_labels.push(count)
+    }
+    points.push({
+      x: x,
+      y: data['yValues'][count-1]
+    })
   }
 
 
