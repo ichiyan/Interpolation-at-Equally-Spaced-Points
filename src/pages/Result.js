@@ -176,15 +176,23 @@ console.log(points)
                     <td>{point.dif2}</td>
                     <td>{point.dif3}</td>
                     <td>{point.dif4}</td>
-                        {/* {
-                          column_labels.map((col, ndx) => {
-                            return(<td key={ndx}  scope="col">0.00123
-                            </td>)
-                          })
-                        } */}
                   </tr>
                 )
               })}
+            </tbody>
+            <tbody>
+            {points.map((point, ndx) =>{
+                return(
+                    <tr key={ndx}>
+                        <td>{point.x}</td>
+                        <td>{point.y}</td>
+                        <td>{point.dif1}</td>
+                        <td>{point.dif2}</td>
+                        <td>{point.dif3}</td>
+                        <td>{point.dif4}</td>
+                    </tr>
+                )
+            })}
             </tbody>
           </table>
           </div>
