@@ -72,7 +72,8 @@ const Result = ({data, method}) => {
         <hr></hr>
         <br></br>
         <h5>Interpolation Table</h5>
-        <table className="table text-center table-striped">
+        <div class="table-responsive">     
+        <table className="table text-center table-striped ">
           <thead>
             <tr >
               <th scope="col">x<sub>i</sub></th>
@@ -84,31 +85,24 @@ const Result = ({data, method}) => {
               }
             </tr>
           </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>1</td>
-              </tr>
+          <tbody>
+              {points.map((point, ndx) => {
+                return (
+                  <tr key={ndx}>
+                    <td>{point.x}</td>
+                    <td>{point.y}</td>
+                        {
+                          column_labels.map((col, ndx) => {
+                            return(<td key={ndx}  scope="col">
+                            </td>)
+                          })
+                        }
+                  </tr>
+                )
+              })}
             </tbody>
           </table>
+          </div>
         </div>
 
         <div className="container mt-5">
