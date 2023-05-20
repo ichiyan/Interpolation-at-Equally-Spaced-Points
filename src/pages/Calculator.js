@@ -1,5 +1,6 @@
 import {React, useState, Fragment, forwardRef, useRef, useEffect} from "react";
 import {useForm} from "react-hook-form";
+import  {parse, evaluate} from 'mathjs';
 import Result from "./Result";
 
 const Calculator = ({}, ref) => {
@@ -15,6 +16,8 @@ const Calculator = ({}, ref) => {
     const [showInputY, setShowInputY] = useState(true);
     const [showInputExpression, setShowInputExpression] = useState(false);
     const [showYValuesLengthError, setShowYValuesLengthError] = useState(false);
+    const [showExpressionError, setShowExpressionError] = useState(false);
+    const [expressionErrorMssg, setExpressionErrorMssg] = useState();
     const [method, setMethod] = useState();
 
     const methodFillYSelected = (method) => {
@@ -30,15 +33,31 @@ const Calculator = ({}, ref) => {
     const [data, setData] = useState();
     const onSubmit = (inputs) => {
         if(showInputExpression == true){
-            setData({
-                initX: parseFloat(inputs['initX']),
-                numX: parseInt(inputs['numX']),
-                diffX: parseFloat(inputs['diffX']),
-                calculateY: parseFloat(inputs['calculateY']),
-                expression: inputs['expression'],
-            });
-            setMethod(1);
-            setIsSubmitted(true);
+            try{
+                parse(inputs['expression'])
+                try{
+                    evaluate(['x=1.5', inputs['expression']])
+                    console.log(evaluate(['x=1.5', inputs['expression']]))
+                    setData({
+                        initX: parseFloat(inputs['initX']),
+                        numX: parseInt(inputs['numX']),
+                        diffX: parseFloat(inputs['diffX']),
+                        calculateY: parseFloat(inputs['calculateY']),
+                        expression: inputs['expression'],
+                    });
+                    setMethod(1);
+                    setIsSubmitted(true);
+                    setShowExpressionError(false);
+                }catch(ex){
+                    setExpressionErrorMssg("Unknown variable must be x.");
+                    setShowExpressionError(true);
+                    setIsSubmitted(false);
+                }
+            }catch(ex){
+                setExpressionErrorMssg("Input must be a valid mathematical expression.");
+                setShowExpressionError(true);
+                setIsSubmitted(false);
+            }
         }else if(showInputY == true){
             var yValuesString = inputs['yValues'].replace(/,\s*$/, "");
             var yValues = yValuesString.split(',').map(parseFloat);
@@ -55,6 +74,7 @@ const Calculator = ({}, ref) => {
                 })
                 setMethod(2);
                 setIsSubmitted(true);
+                setShowYValuesLengthError(false);
             }  
         }
     }
@@ -63,6 +83,7 @@ const Calculator = ({}, ref) => {
         <Fragment>
             <div className="container">
                 <h2 ref={ref}>Interpolation at Equally Spaced Points Calculator</h2>
+                <br></br>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-group pt-3 ">
                         <label htmlFor="initialValue">Initial Value for x</label>
@@ -125,6 +146,9 @@ const Calculator = ({}, ref) => {
                             <error>
                                 {errors.expression?.type === "required" && "Expression is required."}
                             </error>
+                            {
+                                showExpressionError && (<p className="input-error">{expressionErrorMssg}</p>)
+                            }
                         </div>)
                     }
                     <div className="form-group pt-3">

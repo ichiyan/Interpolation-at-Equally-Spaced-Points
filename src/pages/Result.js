@@ -25,8 +25,7 @@ const Result = ({data, method}) => {
 
   // calculator with input function
   if (method == 1){
-      console.log(data)
-      console.log("data")
+      // console.log(data)
       // change to input expression
       //var exp = "Math.sin(x)";
       var exp = data.expression;
@@ -153,7 +152,7 @@ console.log(points)
         <hr></hr>
         <br></br>
         <h5>Interpolation Table</h5>
-        <div class="table-responsive">     
+        <div className="table-responsive">
         <table className="table text-center table-striped ">
           <thead>
             <tr >
@@ -192,7 +191,7 @@ console.log(points)
                         <td>{point.dif4}</td>
                     </tr>
                 )
-            })}
+              })}
             </tbody>
           </table>
           </div>
