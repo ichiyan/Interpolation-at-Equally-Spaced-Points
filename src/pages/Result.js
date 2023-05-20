@@ -1,11 +1,19 @@
 import {React, forwardRef} from "react";
 import Graph from "../components/Graph";
+import {simplify, parse, derivative, forEach, factorial, evaluate} from "mathjs";
+import {create, all } from 'mathjs';
+
+const config = { };
+const math = create(all, config);
 
 const Result = ({data, method}) => {
 
 
   var points = [];
   var column_labels = [];
+  let diff = math.matrix();
+
+  diff.resize([(data.numX), (data.numX)]);
 
   const dummy = [
     {x: 0.0, y: 0.000, dif1: 1.015, dif2: 0.2124999999999999, dif3: 0.5000000000000032, dif4:0.5208333333333183},
@@ -18,8 +26,10 @@ const Result = ({data, method}) => {
   // calculator with input function
   if (method == 1){
       console.log(data)
+      console.log("data")
       // change to input expression
-      var exp = "Math.sin(x)";
+      //var exp = "Math.sin(x)";
+      var exp = data.expression;
 
       for (var x = data['initX'], count = 1; count < data['numX']; x += data['diffX'], count++) {
           points.push({
@@ -46,9 +56,58 @@ const Result = ({data, method}) => {
       y: data['yValues'][count-1]
     })
   }
-
-
+console.log(points)
   //calculate y
+
+    function find_s(s, n){//calculates  s = (x-x0)/delta_x
+        let temp_s = s;
+        for (let i = 1; i < (n - 1); i++) {
+            temp_s = temp_s * (s - i);
+        }
+        return temp_s;
+    }
+    let n = Number(data.numX);
+    let temp = 0;
+
+    diff.set([0,0],9)
+
+    console.log(diff)
+    console.log("diff ^")
+    console.log(diff.get([0,0]))
+
+    for(let ndx=0; ndx<n; ndx++){
+        diff.set([ndx, 0], points[ndx].y);
+    }
+    console.log(diff)
+
+    for (let i=1; i<n; i++){
+        for(let j = n-1; j>=i; j--){
+            temp = diff.get([j, (i-1)]) - diff.get([(j-1), (i-1)]);
+            diff.set([j, i], temp);
+        }
+    }
+    console.log(diff)
+
+    //interpolate
+    let s = points[0].y;
+    let x0 = points[0].x;
+    let x1 = points[0].x;
+    let val = 'x';
+    console.log(x1)
+    console.log(typeof(s))
+    console.log(typeof(x1))
+
+    // let u = (val-x0) / (x1-x0);
+    // let u = simplify((val-x0) / (x1-x0));
+    // // let u = (val-x0) / (x1-x0);
+    // for(let i =1; i<=n; i++){
+    //     s = s + (find_s(u, i) * diff[0][i]) / factorial(i);
+    // }
+    const parser = math.parser()
+
+    parser.evaluate('f(x) = x ^ 2 - 5')
+    console.log("Answer: ")
+    console.log(parser)
 
     return(
       <div>
