@@ -30,17 +30,23 @@ const Result = ({data, method}) => {
       // change to input expression
       //var exp = "Math.sin(x)";
       var exp = data.expression;
+      let last_x = 0;
 
       for (var x = data['initX'], count = 1; count < data['numX']; x += data['diffX'], count++) {
+          const scope = {x:x};
+          let f = math.evaluate(exp, scope)
           points.push({
             x: x,
-            y: eval(exp)
+            y: f
           })
           column_labels.push(count)
+          last_x = x;
       }
+      const scope = {x:last_x+data['diffX']};
+      let f = math.evaluate(exp, scope)
       points.push({
-        x: x,
-        y: eval(exp)
+        x: last_x+data['diffX'],
+        y: f
       })
   }else if(method == 2){
     // calculator with x and y inputs
@@ -66,7 +72,7 @@ console.log(points)
         }
         return temp_s;
     }
-    let n = Number(data.numX);
+    let n = Number(data['numX']);
     let temp = 0;
 
     diff.set([0,0],9)
@@ -81,33 +87,41 @@ console.log(points)
     console.log(diff)
 
     for (let i=1; i<n; i++){
-        for(let j = n-1; j>=i; j--){
+        for(let j = n-i; j>0; j--){
             temp = diff.get([j, (i-1)]) - diff.get([(j-1), (i-1)]);
-            diff.set([j, i], temp);
+            diff.set([j-1, i], temp);
         }
     }
     console.log(diff)
 
     //interpolate
-    let s = points[0].y;
     let x0 = points[0].x;
     let x1 = points[0].x;
     let val = 'x';
     console.log(x1)
-    console.log(typeof(s))
     console.log(typeof(x1))
 
-    // let u = (val-x0) / (x1-x0);
-    // let u = simplify((val-x0) / (x1-x0));
-    // // let u = (val-x0) / (x1-x0);
-    // for(let i =1; i<=n; i++){
-    //     s = s + (find_s(u, i) * diff[0][i]) / factorial(i);
-    // }
-    const parser = math.parser()
+    let s = '((x-'+x0.toString()+')/'+data['diffX'].toString()+') ';
+    let partial_eq = '';
+    let degree = n-1;
+    console.log(s)
 
-    parser.evaluate('f(x) = x ^ 2 - 5')
+    for(let i=1; i<=degree; i++){ //generate co-efficient
+        let num = '';
+
+        for(let j=1; j<=i; j++){ //generate numerator
+            let num_temp = '(' + s + ' - ' + (j-1).toString()+') ';
+            num = num + num_temp;
+        }
+        let co_ef = diff.get([0,i])/factorial(n);
+        console.log(co_ef)
+        partial_eq = partial_eq + ' + '  + co_ef.toString() + num;
+    }
+    let f0 = points[0].y;
+    let f_eq = f0.toString() + partial_eq;
     console.log("Answer: ")
-    console.log(parser)
+    console.log(f_eq)
+
 
     return(
       <div>
