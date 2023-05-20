@@ -114,7 +114,7 @@ const Introduction = ({}, ref) => {
                 Find the formula of <Equation math= "f(x)" />.</p>
         
                 <br/><br/>
-                <p>SOLUTION: Since <Equation math= "f(x)" /> has degree 2, it must be of the form</p>
+                <p>SOLUTION: Since <Equation math= "f(x)" /> has degree 2, it must be of the form <Equation math= "f(x)=a+bx+cx^2" /></p>
                 <p>where the coefficient a,b,c are to be determined. Since <Equation math= "f(1)=2" /></p>
                 <BlockMath math={equation7} />    
 
@@ -130,7 +130,7 @@ const Introduction = ({}, ref) => {
                 <p>We also call <Equation math= " f" /> an interpolating polynomial for this set of 3 points.</p>
                 <p>Here we see that there is exactly one polynomial of degree 2 that interpolates these 3 points. A polynomial of degree 2 has <Equation math= "2+1=3 \ " />
                      unknown coefficients, <Equation math= "a, \ b \ " />and <Equation math= "c\ " /></p>
-                <p> We solved for these from the 3 equations. This can be generalized to the following result.</p>
+                <p> We solved for these from the 3 equations. This can be generalized to the following theorem.</p>
                 <br/>
 
                 <b>Theorem</b>
