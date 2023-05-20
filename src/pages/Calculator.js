@@ -1,4 +1,4 @@
-import {React, useState, Fragment, forwardRef, useRef, useEffect} from "react";
+import {React, useState, Fragment, forwardRef} from "react";
 import {useForm} from "react-hook-form";
 import  {parse, evaluate} from 'mathjs';
 import Result from "./Result";
@@ -11,7 +11,6 @@ const Calculator = ({}, ref) => {
         handleSubmit,
     } = useForm();
 
-    const [submitDisabled, setSubmitDisabled] = useState(true);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [showInputY, setShowInputY] = useState(true);
     const [showInputExpression, setShowInputExpression] = useState(false);
@@ -124,7 +123,7 @@ const Calculator = ({}, ref) => {
                     {
                         showInputY && (
                             <div className="form-group pt-3">
-                                <label htmlFor="yValues">List down y values, separated by a comma. Excess y values will be removed.</label>
+                                <label htmlFor="yValues">List down y values, separated by a comma (no spaces). Excess y values will be removed.</label>
                                 <textarea className="form-control" rows={3} placeholder="ex: 1.5,-2,+3,-4.9"
                                 {...register("yValues", {required: true, pattern:/^[-+]?\d+.?\d*(,[-+]?\d+.?\d*)*$/})}></textarea>
                                 <error>
@@ -141,7 +140,7 @@ const Calculator = ({}, ref) => {
                     { showInputExpression && 
                          (<div className="form-group pt-3">
                             <label htmlFor="simplifyingExpression">Simplifying Expression (f(x))</label>
-                            <input type="" className="form-control" id="differenceValue"
+                            <input type="" className="form-control" id="differenceValue" placeholder="ex: x^3+sqrt(2*x^2)+3*x+sin(1/2)-e^2"
                             {...register("expression", {required: true})}></input>
                             <error>
                                 {errors.expression?.type === "required" && "Expression is required."}

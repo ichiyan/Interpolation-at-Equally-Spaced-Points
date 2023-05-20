@@ -9,7 +9,6 @@ function App() {
 
   const introRef = useRef(null);
   const calcuRef = useRef(null);
-  const resultRef = useRef(null);
   const specsRef = useRef(null);
   const conclusionRef = useRef(null);
 

@@ -1,4 +1,4 @@
-import {React, forwardRef, useEffect,useState } from "react";
+import {React, forwardRef} from "react";
 import 'katex/dist/katex.min.css';
 import { BlockMath } from 'react-katex';
 import Equation from './Equation';
@@ -39,9 +39,9 @@ const Introduction = ({}, ref) => {
     const equation4 = `2.\ \ c\ \\medspace are \\medspace called \\medspace the \\medspace coefficients`;
     const equation5 = `3.\ \ a_0\ \\medspace is \\medspace called \\medspace the \\medspace constant \\medspace terminology`;
     const equation6 = `f(1)=2,\\medspace f(2)=5,\\medspace and\\medspace f(4)=2. \\ `;
-    const equation7 = `2=a+b \\times 1+c \\times1^2`;
-    const equation8 = `5=a+2b+4c`;
-    const equation9 = `2=a+4b+16c`;
+    const equation7 = `2=a(1)^2+b(1)+c`;
+    const equation8 = `5=4a+2b+c`;
+    const equation9 = `2=16a+4b+c`;
     const equation10 = `\\left(x_0,\\ y_0\\right),\\ 
     \\left(x_1,\\ y_1\\right),\\ 
     \\ldots,\\ 
@@ -120,7 +120,7 @@ const Introduction = ({}, ref) => {
                 <br/><br/>
                 <p>SOLUTION: Since <Equation math= "f(x)" /> has degree 2, it must be of the form</p>
                 <BlockMath math={`ax^2 + bx + c`} />
-                <p>where the coefficient a,b,c are to be determined. Since <Equation math= "f(1)=2" /></p>
+                <p>where the coefficients <Equation math= "a, b, c" /> are to be determined. Since <Equation math= "f(1)=2" />,</p>
                 <BlockMath math={equation7} />    
 
                 <p>Similarly, we get two other equations:</p>
@@ -135,7 +135,7 @@ const Introduction = ({}, ref) => {
                 <p>We also call <Equation math= " f" /> an interpolating polynomial for this set of 3 points.</p>
                 <p>Here we see that there is exactly one polynomial of degree 2 that interpolates these 3 points. A polynomial of degree 2 has <Equation math= "2+1=3 \ " />
                      unknown coefficients, <Equation math= "a, \ b \ " />and <Equation math= "c\ " />.</p>
-                <p> We solved for these from the 3 equations. This can be generalized to the following result.</p>
+                <p> We solved for these from the 3 equations. This can be generalized to the following result:</p>
                 <BlockMath math={`f(x) = -4x^2 + \\frac{{15}}{{2}}x + \\frac{{-3}}{{2}}`} />
                 
                 <br/>
@@ -145,7 +145,7 @@ const Introduction = ({}, ref) => {
             <p>Suppose that we have <Equation math= "n+1 \ " /> points:</p>
             <BlockMath math={equation10} />  
 
-                <p>are distinct numbers (no such condition on the <Equation math= "y_i' s. \ " />
+                <p>are distinct numbers (no such condition on the <Equation math= "y_i' s. \ " />)
                      
 
                 Then there is exactly one polynomial <Equation math= "f \ " /> of degree <Equation math= "\leq n \ " /> that interpolates these <Equation math= "n+1 " /> points, i.e.,
@@ -197,9 +197,9 @@ const Introduction = ({}, ref) => {
             
             <table style={frameLine.table}>
                 <tr>
-                    <td style={tableStyle}>x</td>
-                    <td style={tableStyle}>f (x)</td>
-                    <td style={tableStyle}>∆f</td>
+                    <td style={tableStyle}><Equation math= "x " /></td>
+                    <td style={tableStyle}><Equation math= "f(x) \ " /></td>
+                    <td style={tableStyle}><Equation math= " ∆f \ " /></td>
                     <td style={tableStyle}><BlockMath math={equation13} /></td>
                     <td style={tableStyle}><BlockMath math={equation14} /></td>
                     <td style={tableStyle}><BlockMath math={equation15} /></td>

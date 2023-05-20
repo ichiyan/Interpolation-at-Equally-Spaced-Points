@@ -1,4 +1,5 @@
 import {React, forwardRef} from "react";
+import {evaluate} from "mathjs";
 import Graph from "../components/Graph";
 
 const Result = ({data, method}) => {
@@ -19,18 +20,17 @@ const Result = ({data, method}) => {
   if (method == 1){
       // console.log(data)
       // change to input expression
-      var exp = "Math.sin(x)";
 
       for (var x = data['initX'], count = 1; count < data['numX']; x += data['diffX'], count++) {
           points.push({
             x: x,
-            y: eval(exp)
+            y: evaluate(data['expression'], {x: x})
           })
           column_labels.push(count)
       }
       points.push({
         x: x,
-        y: eval(exp)
+        y: evaluate(data['expression'], {x: x})
       })
   }else if(method == 2){
     // calculator with x and y inputs
