@@ -179,7 +179,7 @@ const Introduction = ({}, ref) => {
       </p>
         <br/>
 
-        <h4>Example</h4>
+        <h4>Example:</h4>
             <p>Given this table of <Equation math= "x, f(x) \ " />
                  values, and the columns of differences, find <Equation math= "P_4 \ " /></p>
             
@@ -261,14 +261,16 @@ const Introduction = ({}, ref) => {
             " />
         
             <br/>
-            <p><Equation math= "f(0.73) \ " />
+            <h4>Example:</h4>
+            <p>Find <Equation math= "f(0.73) \ " />
                  from a cubic interpolating polynomial.</p>
-            
+            <br/>
             <p>In order to center the <Equation math= "x \ " />-values around <Equation math= "x = 0.73 \ " />, we must use the four entries beginning
-            with <Equation math= "x = 0.4 \ " />. That makes <Equation math= "x_o = 0.4 \ " />and <Equation math= "s = (0.73 - 0.4)/0.2 = 1.65 \ " />. Inserting the proper
+            with <Equation math= "x = 0.4 \ " /> and <Equation math= "∆x = 0.2 = \frac{1}{5} \ " />. That makes <Equation math= "x_o = 0.4 \ " />and 
+            <BlockMath math="s = \frac{{(0.73 - 0.4)}}{{0.2}}=1.65" />
+             Inserting the proper
             values into the expression for the Newton-Gregory polynomial, we get </p>
-            <p>The <Equation math= "∆x = 0.2 = \frac{1}{5} \ " /></p>
-            <p>Thus,</p>
+            
             
             <BlockMath math={equation17} />
             <BlockMath math={equation18} />
