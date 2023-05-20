@@ -13,7 +13,7 @@ const Result = ({data, method}) => {
       // change to input expression
       var exp = "Math.sin(x)";
 
-      for (var x = data['initX'], count = 1; count < data['numX']; x += data['diffX'], count++) {
+      for (var x = data['initX'], count = 1; count < data['numX']; x = parseInt(x) + parseInt(data['diffX']), count++) {
           points.push({
             x: x,
             y: eval(exp)
