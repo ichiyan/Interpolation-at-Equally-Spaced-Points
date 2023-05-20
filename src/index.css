@@ -12,7 +12,7 @@ code {
     monospace;
 }
 
-error{
+error, .input-error{
   color: #ff6774;
 }
 
@@ -94,6 +94,7 @@ error{
   padding-top: 0;
   top: 70px;
 }
+
 
 
 

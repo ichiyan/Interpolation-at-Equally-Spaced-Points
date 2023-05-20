@@ -29,19 +29,19 @@ const Graph = ({points}) => {
         <Plot
             data={[
                 {
+                    x: xValues,
+                    y: yValues,
+                    mode: 'lines',
+                    marker: {color: '#6495ED', size: 20},
+                    name: "interpolation polynomial"
+                },
+                {
                     x: inputXValues,
                     y: inputYValues,
                     type: 'scatter',
                     mode: 'markers',
                     marker: {color: '#ff4716'},
                     name: "data points"
-                },
-                {
-                    x: xValues,
-                    y: yValues,
-                    mode: 'lines',
-                    marker: {color: '#6495ED'},
-                    name: "interpolation polynomial"
                 },
             ]}
             // layout={{width: 770, height: 510}}

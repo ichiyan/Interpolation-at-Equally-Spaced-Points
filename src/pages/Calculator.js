@@ -1,4 +1,4 @@
-import {React, useState, Fragment, forwardRef, useRef} from "react";
+import {React, useState, Fragment, forwardRef, useRef, useEffect} from "react";
 import {useForm} from "react-hook-form";
 import Result from "./Result";
 
@@ -10,19 +10,53 @@ const Calculator = ({}, ref) => {
         handleSubmit,
     } = useForm();
 
+    const [submitDisabled, setSubmitDisabled] = useState(true);
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [showInputY, setShowInputY] = useState(true);
+    const [showInputExpression, setShowInputExpression] = useState(false);
+    const [showYValuesLengthError, setShowYValuesLengthError] = useState(false);
+    const [method, setMethod] = useState();
+
+    const methodFillYSelected = (method) => {
+        if (method == "input-y"){
+            setShowInputY(true);
+            setShowInputExpression(false);
+        }else if(method == "input-expression"){
+            setShowInputExpression(true);
+            setShowInputY(false);
+        }
+    }
 
     const [data, setData] = useState();
     const onSubmit = (inputs) => {
-        setIsSubmitted(true);
-        // add condition if expression existss
-        setData({
-            initX: inputs['initX'],
-            numX: inputs['numX'],
-            diffX: inputs['diffX'],
-            calculateY: inputs['calculateY'],
-            expression: inputs['expression']
-        })
+        if(showInputExpression == true){
+            setData({
+                initX: parseFloat(inputs['initX']),
+                numX: parseInt(inputs['numX']),
+                diffX: parseFloat(inputs['diffX']),
+                calculateY: parseFloat(inputs['calculateY']),
+                expression: inputs['expression'],
+            });
+            setMethod(1);
+            setIsSubmitted(true);
+        }else if(showInputY == true){
+            var yValuesString = inputs['yValues'].replace(/,\s*$/, "");
+            var yValues = yValuesString.split(',').map(parseFloat);
+            if(yValues.length < parseInt(inputs['numX'])){
+                setShowYValuesLengthError(true);
+                setIsSubmitted(false);
+            }else{
+                setData({
+                    initX: parseFloat(inputs['initX']),
+                    numX: parseInt(inputs['numX']),
+                    diffX: parseFloat(inputs['diffX']),
+                    calculateY: parseFloat(inputs['calculateY']),                   
+                    yValues: yValues,
+                })
+                setMethod(2);
+                setIsSubmitted(true);
+            }  
+        }
     }
     
     return(
@@ -57,17 +91,42 @@ const Calculator = ({}, ref) => {
                             {errors.diffX?.type === "pattern" && "x should be a positive or negative number."}
                         </error>
                     </div>
-                    {/* add option here, whether to input function or y values */}
-                    {/* if y values, either a) generate x y table (user inputs y), table no longer shown in result component */}
-                    {/* or b) just list down y values, separated by comma or something */}
+
                     <div className="form-group pt-3">
-                        <label htmlFor="simplifyingExpression">Simplifying Expression (f(x))</label>
-                        <input type="" className="form-control" id="differenceValue"
-                        {...register("expression", {required: true})}></input>
-                        <error>
-                            {errors.expression?.type === "required" && "Expression is required."}
-                        </error>
+                        <label htmlFor="methodYValues">Select method of filling in the y values</label>
+                        <div className="d-inline-flex w-100 justify-content-between">
+                            <button type="button" onClick={() => {methodFillYSelected("input-y")}} className="btn btn-primary mt-3" style={{width: "49%", color: "black"}}>input y values</button>
+                            <button type="button" onClick={() => {methodFillYSelected("input-expression")}} className="btn btn-warning mt-3" style={{width: "49%"}}>input expression</button>
+                        </div>
                     </div>
+                    
+                    {
+                        showInputY && (
+                            <div className="form-group pt-3">
+                                <label htmlFor="yValues">List down y values, separated by a comma. Excess y values will be removed.</label>
+                                <textarea className="form-control" rows={3} placeholder="ex: 1.5,-2,+3,-4.9"
+                                {...register("yValues", {required: true, pattern:/^[-+]?\d+.?\d*(,[-+]?\d+.?\d*)*$/})}></textarea>
+                                <error>
+                                    {errors.yValues?.type === "required" && "List of y values is required."}
+                                    {errors.yValues?.type === "pattern" && "y values should be a positive or negative number seperated by a comma."}
+                                </error>
+                                {
+                                    showYValuesLengthError && (<p className="input-error">Number of y values is less than number of x values.</p>)
+                                }
+                            </div>
+                        )
+                    }
+
+                    { showInputExpression && 
+                         (<div className="form-group pt-3">
+                            <label htmlFor="simplifyingExpression">Simplifying Expression (f(x))</label>
+                            <input type="" className="form-control" id="differenceValue"
+                            {...register("expression", {required: true})}></input>
+                            <error>
+                                {errors.expression?.type === "required" && "Expression is required."}
+                            </error>
+                        </div>)
+                    }
                     <div className="form-group pt-3">
                         <h5><label htmlFor="calculateY_Value">Calculate y-value at specific x-value</label></h5>
                         <input type="" className="form-control" id="calculateY_Value" placeholder="Optional"
@@ -76,11 +135,11 @@ const Calculator = ({}, ref) => {
                             {errors.calculateY?.type === "pattern" && "x should be a positive or negative number."}
                         </error>
                     </div>
-                    <button type="submit" className="btn btn-primary mt-3 w-100">Calculate</button>
+                    <button type="submit" className="btn btn-dark mt-3 w-100">Calculate</button>
                 </form>
             </div>
             <br></br>
-            {isSubmitted && <Result data={data} method={1}/>}
+            {isSubmitted && <Result data={data} method={method}/>}
         </Fragment>
     )
 }
