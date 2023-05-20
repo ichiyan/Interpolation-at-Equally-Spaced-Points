@@ -63,6 +63,7 @@ const Calculator = ({}, ref) => {
         <Fragment>
             <div className="container">
                 <h2 ref={ref}>Interpolation at Equally Spaced Points Calculator</h2>
+                <br></br>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-group pt-3 ">
                         <label htmlFor="initialValue">Initial Value for x</label>

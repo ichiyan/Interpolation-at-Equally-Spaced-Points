@@ -71,15 +71,17 @@ const Introduction = ({}, ref) => {
                 <p>The process of fitting a function through given data is called interpolation.</p>
                 <p>Usually when we have data, we don’t know the function <Equation math= "f(x) \ " /> that generated the data. So we fit certain class of functions.</p>
                 <p>The most usual class of functions fitted through data are polynomials. We will see why polynomials are fitted through data when we don’t know <Equation math= "f(x) \ " />.</p>
+                <br/><br/>
                 <img alt="Flowers in Chania" height="345" src="https://cdn.britannica.com/13/3113-004-19196621/function-interpolation-values-points-polynomial-polynomials-sets.jpg" width="460"></img>
 
                 <br/><br/>
                 
                 <p>Polynomials are often used because they have the property of approximating any continuous function.</p>
                 <p>Given:</p>
-                <p>◦ <Equation math= "f(x)" /> continuous on <Equation math= "[a, \ b]" /></p>
-                <p>◦ <Equation math= "\varepsilon>0 \ " />
-                (called tolerance)</p>
+                <ul>
+                    <li><p><Equation math= "f(x)" /> continuous on <Equation math= "[a, \ b]" /></p></li>
+                    <li><p><Equation math= "\varepsilon>0 \ "  />(called tolerance)</p></li>
+                </ul>
                 <p>Then, there is a polynomial <Equation math= "P(x)" /> of appropriate degree which approximates the function within the given tolerance.</p>
                 <br/>
 
@@ -87,7 +89,7 @@ const Introduction = ({}, ref) => {
                 <p>Here we shall work with polynomials. These are functions with the following form:</p>
                 <BlockMath math={equation1} />
 
-                <p>where <Equation math= " n \ " /> is any nonnegative integer,</p>
+                <p>where <Equation math= " n \ " /> is any nonnegative integer, and</p>
                 <BlockMath math={equation2} />
                 <p>are any fixed numbers, with</p>
                 <BlockMath math={equation2_5} />
@@ -108,13 +110,16 @@ const Introduction = ({}, ref) => {
                 </table>
                 </div>
                 <p>Polynomials have many uses in mathematics. Here we shall learn about polynomial interpolation. The following example introduces this.</p>
-                <h4>EXAMPLE:</h4>
+                <br></br>
+                <h4>Example:</h4>
+                <br></br>
                 <p>Suppose that <Equation math= "f(x)" /> is a polynomial of degree 2 with 
                 <Equation math= {equation6}  />  
                 Find the formula of <Equation math= "f(x)" />.</p>
         
                 <br/><br/>
                 <p>SOLUTION: Since <Equation math= "f(x)" /> has degree 2, it must be of the form</p>
+                <BlockMath math={`ax^2 + bx + c`} />
                 <p>where the coefficient a,b,c are to be determined. Since <Equation math= "f(1)=2" /></p>
                 <BlockMath math={equation7} />    
 
@@ -124,13 +129,15 @@ const Introduction = ({}, ref) => {
 
                 <p>Solving all the three equations together we get <Equation math= "a = -4, \ b = 15/2, \ c = -3/2" />
                     .</p>
-                <p>In this example we say that f interpolates the three points <Equation math= "(1,2), \ (2,5) \ " />and 
+                <p>In this example we say that <Equation math= " f" /> interpolates the three points <Equation math= "(1,2), \ (2,5) \ " />and 
                 <Equation math= " \ (4,2)" />
                     .</p>
                 <p>We also call <Equation math= " f" /> an interpolating polynomial for this set of 3 points.</p>
                 <p>Here we see that there is exactly one polynomial of degree 2 that interpolates these 3 points. A polynomial of degree 2 has <Equation math= "2+1=3 \ " />
-                     unknown coefficients, <Equation math= "a, \ b \ " />and <Equation math= "c\ " /></p>
+                     unknown coefficients, <Equation math= "a, \ b \ " />and <Equation math= "c\ " />.</p>
                 <p> We solved for these from the 3 equations. This can be generalized to the following result.</p>
+                <BlockMath math={`f(x) = -4x^2 + \\frac{{15}}{{2}}x + \\frac{{-3}}{{2}}`} />
+                
                 <br/>
 
                 <b>Theorem</b>
@@ -145,8 +152,10 @@ const Introduction = ({}, ref) => {
                 <BlockMath math={equation12} />  
             </p>
         </div>
-
+        <br></br>
         <h3>Interpolation Using Equally Spaced Points</h3>
+        <br></br>
+        <br></br>
         <p>
         If the <Equation math= "x " />-values are evenly spaced, getting an interpolating polynomial is considerably simplified. Instead of using divided differences, "ordinary differences" are used; the differences in <Equation math= "f " />-values are not divided by the differences in x-values. A delta symbol is used to write them and, for a table of <Equation math= "N + 1 (x, f(x)) \ " />
          pairs, differences up to the Nth order can be computed.
@@ -173,15 +182,18 @@ const Introduction = ({}, ref) => {
       <p>
         An interpolating polynomial of degree n can be written in terms of these ordinary differences, with x evaluated at x:
       </p>
+      <br></br>
       <BlockMath math="p_n(x)=f_o+\frac{x-x_0}{∆x}∆f_o+\frac{\frac{(x-x_0)}{∆x}(\frac{x-x_0}{∆x}-1)}{2!}∆^{2}fo+\frac{\frac{(x-x_0)}{∆x}(\frac{(x-x_0)}{∆x}-1)(\frac{(x-x_0)}{∆x}-2)}{3!}∆^{3}fo \\  +\dots+ \frac{\frac{(x-x_0)}{∆x}(\frac{(x-x_0)}{∆x}-1)\dots(\frac{(x-x_0)}{∆x}-n+1)}{n!}∆^{n}fo" />
+      <br></br>
       <p>
-        This form of the interpolating polynomial is called the Newton-Gregory forward polynomial.
+        This form of the interpolating polynomial is called the <b>Newton-Gregory forward polynomial</b>.
       </p>
         <br/>
 
         <h4>Example:</h4>
+        <br></br>
             <p>Given this table of <Equation math= "x, f(x) \ " />
-                 values, and the columns of differences, find <Equation math= "P_4 \ " /></p>
+                 values, and the columns of differences, find <Equation math= "P_4 \ " />.</p>
             
             <table style={frameLine.table}>
                 <tr>
@@ -261,16 +273,19 @@ const Introduction = ({}, ref) => {
             " />
         
             <br/>
-            <h4>Example:</h4>
-            <p>Find <Equation math= "f(0.73) \ " />
+            {/* <h4>Example:</h4> */}
+            <br></br>
+            <p>We can also find <Equation math= "f(0.73) \ " />
                  from a cubic interpolating polynomial.</p>
             <br/>
             <p>In order to center the <Equation math= "x \ " />-values around <Equation math= "x = 0.73 \ " />, we must use the four entries beginning
             with <Equation math= "x = 0.4 \ " /> and <Equation math= "∆x = 0.2 = \frac{1}{5} \ " />. That makes <Equation math= "x_o = 0.4 \ " />and 
-            <BlockMath math="s = \frac{{(0.73 - 0.4)}}{{0.2}}=1.65" />
+            <br></br>
+            <BlockMath math={`\\frac{{(x-x_0)}}{{∆x}}=\\frac{{(0.73-0.4)}}{{0.2}}=1.65`} />
+            <br></br>
              Inserting the proper
             values into the expression for the Newton-Gregory polynomial, we get </p>
-            
+            <br></br>
             
             <BlockMath math={equation17} />
             <BlockMath math={equation18} />
@@ -278,6 +293,7 @@ const Introduction = ({}, ref) => {
 
         
             <br/><br/>
+            <br></br>
         </div>
         
     )
