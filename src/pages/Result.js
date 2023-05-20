@@ -179,20 +179,6 @@ console.log(points)
                 )
               })}
             </tbody>
-            <tbody>
-            {points.map((point, ndx) =>{
-                return(
-                    <tr key={ndx}>
-                        <td>{point.x}</td>
-                        <td>{point.y}</td>
-                        <td>{point.dif1}</td>
-                        <td>{point.dif2}</td>
-                        <td>{point.dif3}</td>
-                        <td>{point.dif4}</td>
-                    </tr>
-                )
-              })}
-            </tbody>
           </table>
           </div>
         </div>
