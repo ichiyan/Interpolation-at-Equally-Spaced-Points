@@ -26,8 +26,9 @@ error, .input-error{
 
 .topbar-text{
   color: "#04245c";
-  min-width: 220px;
-  max-width: 220px;
+  min-width: 180px;
+  max-width: 180px;
+  /* position: absolute; */
 }
 
 #content {

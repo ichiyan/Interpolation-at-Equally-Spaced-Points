@@ -24,7 +24,7 @@ function App() {
   return (
     <div className="App">
       <nav className="navbar navbar-light navbar-expand-lg" id='topbar'>
-        <div className='container'>
+        <div className='container' style={{minWidth: "220px"}}>
           <span className="navbar-brand mb-0 h1 fw-bold px-4 topbar-text">Numerical Analysis</span>
         </div>
       </nav>
