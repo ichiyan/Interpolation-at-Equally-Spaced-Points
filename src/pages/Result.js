@@ -26,7 +26,6 @@ const Result = ({data, method}) => {
       })
   }else if(method == 2){
     // calculator with x and y inputs
-
   }
 
 
@@ -74,29 +73,21 @@ const Result = ({data, method}) => {
               }
             </tr>
           </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>1</td>
-              </tr>
+          <tbody>
+              {points.map((point, ndx) => {
+                return (
+                  <tr key={ndx}>
+                    <td>{point.x}</td>
+                    <td>{point.y}</td>
+                        {
+                          column_labels.map((col, ndx) => {
+                            return(<td key={ndx}  scope="col">test
+                            </td>)
+                          })
+                        }
+                  </tr>
+                )
+              })}
             </tbody>
           </table>
         </div>
