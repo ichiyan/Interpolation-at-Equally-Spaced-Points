@@ -1,5 +1,4 @@
-import {React, forwardRef} from "react";
-import {evaluate} from "mathjs";
+import {React, useState} from "react";
 import Graph from "../components/Graph";
 import {simplify, parse, derivative, forEach, factorial, evaluate} from "mathjs";
 import {create, all } from 'mathjs';
@@ -9,6 +8,7 @@ const math = create(all, config);
 
 const Result = ({data, method}) => {
 
+  // const [interpolation, setInterpolation] = useState();
 
   var points = [];
   var column_labels = [];
@@ -117,10 +117,9 @@ console.log(points)
         partial_eq = partial_eq + ' + '  + co_ef.toString() + num;
     }
     let f0 = points[0].y;
-    let f_eq = f0.toString() + partial_eq;
+    var f_eq = f0.toString() + partial_eq;
     console.log("Answer: ")
     console.log(f_eq)
-
 
     return(
       <div>
@@ -215,7 +214,7 @@ console.log(points)
           <hr></hr>
           <br></br>
           <h5>Graph</h5>
-          <Graph points={points}/>
+          <Graph points={points} interpolation={f_eq} data={data}/>
         </div>
       </div>
     )
