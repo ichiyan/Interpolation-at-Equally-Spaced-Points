@@ -224,7 +224,7 @@ console.log(points)
         <div className="container mt-5">
           <hr></hr>
           <br></br>
-            <h5>Interpolated y-value at x=</h5>
+            <h5>Interpolated y-value at x= {data['calculateY']}</h5>
             <p>{interpolate_f}</p>
         </div>
 
