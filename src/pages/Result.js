@@ -3,8 +3,8 @@ import Graph from "../components/Graph";
 import {simplify, factorial, evaluate} from "mathjs";
 import {create, all } from 'mathjs';
 import 'katex/dist/katex.min.css';
-import {InlineMath } from 'react-katex';
-
+import { InlineMath } from 'react-katex';
+import Equation from './Equation';
 
 const config = { };
 const math = create(all, config);
@@ -216,7 +216,7 @@ const Result = ({data, method}) => {
             <br></br>
             <span style={{display: "block", padding: "10px 0"}}><InlineMath math={simplified}/></span>
         </div>
-        
+
         {
           interY != '' && (
             <div className="container mt-5">
