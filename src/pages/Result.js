@@ -121,19 +121,7 @@ console.log(points)
     let f_eq = f0.toString() + partial_eq;
     console.log("Answer: ")
     console.log(f_eq)
-
-    //showTable(ndx)
-    let diff_table = [];
-    for(let i=0; i<=(data['numX']); i++){
-        diff_table.push({
-            x: points[i].x,
-            y: points[i].y,
-            df1: diff.get([i,1]),
-            df2: diff.get([i,2]),
-            df3: diff.get([i,3]),
-            df4: diff.get([i,4]),
-        })
-    }
+    column_labels.push(data['numX'])
 
     return(
       <div>
@@ -178,32 +166,19 @@ console.log(points)
               }
             </tr>
           </thead>
-          <tbody>
-              {dummy.map((point, ndx) => {
-                return (
-                  <tr key={ndx}>
-                    <td>{point.x}</td>
-                    <td>{point.y}</td>
-                    <td>{point.dif1}</td>
-                    <td>{point.dif2}</td>
-                    <td>{point.dif3}</td>
-                    <td>{point.dif4}</td>
-                  </tr>
-                )
-              })}
-            </tbody>
             <tbody>
             {points.map((point, ndx) =>{
                 return(
                     <tr key={ndx}>
                         <td>{point.x}</td>
                         <td>{point.y}</td>
-                        {/*{this.showTable(ndx)}*/}
-                        {/*<td>{diff.get([ndx,1])}</td>*/}
-                        {/*<td>{diff.get([ndx,2])}</td>*/}
-                        {/*<td>{diff.get([ndx,3])}</td>*/}
-                        {/*<td>{diff.get([ndx,4])}</td>*/}
-                        {/*<td>{diff.get([ndx,5])}</td>*/}
+                        {
+                            column_labels.map((col, i) => {
+                                if(i>0){
+                                    return(<th> {diff.get([ndx,i])} </th>)
+                                }
+                            })
+                        }
                     </tr>
                 )
             })}
