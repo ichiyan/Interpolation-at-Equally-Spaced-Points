@@ -1,10 +1,10 @@
-import {React, forwardRef} from "react";
+import {React} from "react";
 import Graph from "../components/Graph";
-import {simplify, parse, derivative, forEach, factorial, evaluate} from "mathjs";
+import {simplify, factorial, evaluate} from "mathjs";
 import {create, all } from 'mathjs';
-import Equation from './Equation';
 import 'katex/dist/katex.min.css';
-import { InlineMath } from 'react-katex';
+import {InlineMath } from 'react-katex';
+
 
 const config = { };
 const math = create(all, config);
@@ -18,14 +18,6 @@ const Result = ({data, method}) => {
   let diff = math.matrix();
 
   diff.resize([(data.numX), (data.numX)]);
-
-  const dummy = [
-    {x: 0.0, y: 0.000, dif1: 1.015, dif2: 0.2124999999999999, dif3: 0.5000000000000032, dif4:0.5208333333333183},
-    {x: 0.2, y: 0.203, dif1: 1.0999999999999999, dif2: 0.5125000000000018, dif3: 0.9166666666666579	},
-    {x: 0.4, y: 0.423, dif1: 1.3050000000000006, dif2: 1.0624999999999967},
-    {x: 0.6, y: 0.684, dif1: 1.7299999999999993},
-    {x: 0.8, y: 1.030},
-  ];
 
   // calculator with input function
   if (method == 1){
@@ -98,37 +90,55 @@ const Result = ({data, method}) => {
     //interpolate
     let x0 = points[0].x;
     let x1 = points[0].x;
-    let val = 'x';
-    console.log(x1)
-    console.log(typeof(x1))
 
     let s = '((x-'+x0.toString()+')/'+data['diffX'].toString()+') ';
+    let s_d = '\\frac{x-'+x0.toString()+'}{'+data['diffX'].toString()+'} ';
     let partial_eq = '';
+    let partial_pn = '';
     let degree = n-1;
     console.log(s)
 
     for(let i=1; i<=degree; i++){ //generate co-efficient
         let num = '';
+        let num_d = '';
+        let dnum = 1;
 
         for(let j=1; j<=i; j++){ //generate numerator
             let num_temp = '(' + s + ' - ' + (j-1).toString()+') ';
+            let num_temp_d = '(' + s_d + ' - ' + (j-1).toString()+') ';
             num = num + num_temp;
+            num_d = num_d + num_temp_d;
         }
-        let co_ef = diff.get([0,i])/factorial(n);
+        if(degree>1){
+            dnum = factorial(i);
+        }
+        let co_ef = diff.get([0,i])/dnum;
+        console.log(diff.get([0,i]))
+        console.log(dnum)
+        console.log(n)
+        console.log("co ef: ")
         console.log(co_ef)
         partial_eq = partial_eq + ' + '  + co_ef.toString() + num;
+        //partial_pn = partial_pn + ' + ((' + num +')/' + dnum.toString() + ') ('+diff.get([0,i]).toString()+') ';
+        partial_pn = partial_pn + ' + \\frac{' + num_d +'}{' + dnum.toString() + '} ('+diff.get([0,i]).toString()+') ';
     }
     let f0 = points[0].y;
     let f_eq = f0.toString() + partial_eq;
+    let pn = 'P_' + column_labels[column_labels.length - 1] + '(x) = ' + f0.toString() + partial_pn;
     console.log("Answer: ")
-    console.log(f_eq)
+    console.log(pn)
+    console.log("simplified: ")
+    let simplified = 'P_' + column_labels[column_labels.length - 1] + '(x) = ' + simplify(f_eq).toString();
+    console.log(simplified)
 
     //calculate y
-    var inter_y = '';
-    var inter_x = '';
+    var interY = '';
+    var interX = '';
+    var interYString;
     if(data['calculateY'].length >= 1){
-      inter_x = parseFloat(data['calculateY'])
-      inter_y = evaluate(f_eq, {x: inter_x})
+      interX = parseFloat(data['calculateY'])
+      interY = evaluate(f_eq, {x: interX})
+      interYString = "f(" + interX.toString() + ")" + " = " + interY.toString()
     }
 
     return(
@@ -197,17 +207,22 @@ const Result = ({data, method}) => {
           <hr></hr>
           <br></br>
             <h5>Polynomial</h5>
-            <p></p>
+            <br></br>
+            <span style={{display: "block", padding: "10px 0"}}><InlineMath math={pn}/></span>
+            <br></br>
+            <h5>Simplified Polynomial</h5>
+            <br></br>
+            <span style={{display: "block", padding: "10px 0"}}><InlineMath math={simplified}/></span>
         </div>
         
         {
-          inter_y != '' && (
+          interY != '' && (
             <div className="container mt-5">
               <hr></hr>
               <br></br>
-                <h5>Interpolated y-value at x = {inter_x}</h5>
+                <h5>Interpolated y-value at x = {interX}</h5>
                 <br></br>
-                {/* <p><InlineMath math={}></InlineMath></p> */}
+                <span style={{display: "block", padding: "10px 0"}}><InlineMath math={interYString}/></span>
             </div>
           )
         }

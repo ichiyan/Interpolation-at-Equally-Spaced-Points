@@ -41,6 +41,7 @@ const Calculator = ({}, ref) => {
                         initX: parseFloat(inputs['initX']),
                         numX: parseInt(inputs['numX']),
                         diffX: parseFloat(inputs['diffX']),
+                        // parse calculateY after checking length (see Result component)
                         calculateY: inputs['calculateY'],
                         expression: inputs['expression'],
                     });
