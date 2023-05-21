@@ -97,9 +97,6 @@ console.log(points)
     //interpolate
     let x0 = points[0].x;
     let x1 = points[0].x;
-    let val = 'x';
-    console.log(x1)
-    console.log(typeof(x1))
 
     let s = '((x-'+x0.toString()+')/'+data['diffX'].toString()+') ';
     let partial_eq = '';
@@ -108,12 +105,20 @@ console.log(points)
 
     for(let i=1; i<=degree; i++){ //generate co-efficient
         let num = '';
+        let dnum = 1;
 
         for(let j=1; j<=i; j++){ //generate numerator
             let num_temp = '(' + s + ' - ' + (j-1).toString()+') ';
             num = num + num_temp;
         }
-        let co_ef = diff.get([0,i])/factorial(n);
+        if(degree>1){
+            dnum = factorial(i);
+        }
+        let co_ef = diff.get([0,i])/dnum;
+        console.log(diff.get([0,i]))
+        console.log(dnum)
+        console.log(n)
+        console.log("co ef: ")
         console.log(co_ef)
         partial_eq = partial_eq + ' + '  + co_ef.toString() + num;
     }
@@ -121,6 +126,19 @@ console.log(points)
     let f_eq = f0.toString() + partial_eq;
     console.log("Answer: ")
     console.log(f_eq)
+
+    const re = /^[0-9\b]+$/;
+    let interpolate_f = null;
+    console.log(interpolate_f)
+    console.log(data['calculateY'])
+    if(data['calculateY'] != null){
+        const scope = {x:data['calculateY']};
+        interpolate_f = math.evaluate(f_eq, scope)
+
+    }
+    console.log("pnx: ")
+    console.log(interpolate_f)
+
     column_labels.push(data['numX'])
 
     return(
@@ -191,14 +209,14 @@ console.log(points)
           <hr></hr>
           <br></br>
             <h5>Polynomial</h5>
-            <p></p>
+            <p>{f_eq}</p>
         </div>
 
         <div className="container mt-5">
           <hr></hr>
           <br></br>
             <h5>Interpolated y-value at x=</h5>
-            <p></p>
+            <p>{interpolate_f}</p>
         </div>
 
         <div className="container mt-5">
