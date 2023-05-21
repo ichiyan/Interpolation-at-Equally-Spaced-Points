@@ -1,29 +1,36 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
+import {evaluate} from "mathjs";
 
-const Graph = ({points}) => {
+const Graph = ({points, interpolation, data}) => {
 
-    // interpolation polynomial
-    var exp = "Math.sin(x)";
-    var xValues = [];
-    var yValues = [];
 
-    // to change: condition
-    for (var x = 0; x <= 10; x += 0.1) {
-        xValues.push(x);
-        yValues.push(eval(exp));
-    }
-
-    // input points
     var inputXValues = [];
     var inputYValues = [];
+
+    // interpolation polynomial
+    var xValues = [];
+    var yValues = [];
 
     points.map((point) => {
         inputXValues.push(point.x);
         inputYValues.push(point.y)
+
+        xValues.push(point.x)
     })
 
-    
+    for(var ndx = 0; ndx < data['numX']; ndx++){
+        yValues.push(evaluate(interpolation, {x: xValues[ndx]}))
+    }
+
+
+    console.log("graph")
+    // console.log(xValues)
+    // console.log(yValues)
+    console.log(interpolation)
+    console.log(evaluate(
+        "4 + 1(((x-1)/1)  - 0)  + 0(((x-1)/1)  - 0) (((x-1)/1)  - 1)  + 0(((x-1)/1)  - 0) (((x-1)/1)  - 1) (((x-1)/1)  - 2)  + 0(((x-1)/1)  - 0) (((x-1)/1)  - 1) (((x-1)/1)  - 2) (((x-1)/1)  - 3) ", 
+        {x:3}))
 
     return(
         <Plot

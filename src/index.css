@@ -101,7 +101,8 @@ error, .input-error{
   top: 70px;
 }
 
-
-
+.specifications li{
+  padding: 5px 0;
+}
 
 

@@ -8,6 +8,7 @@ const math = create(all, config);
 
 const Result = ({data, method}) => {
 
+  // const [interpolation, setInterpolation] = useState();
 
   var points = [];
   var column_labels = [];
@@ -178,7 +179,7 @@ console.log(points)
             </tr>
           </thead>
           <tbody>
-              {diff_table.map((point, ndx) => {
+              {dummy.map((point, ndx) => {
                 return (
                   <tr key={ndx}>
                     <td>{point.x}</td>
@@ -229,7 +230,7 @@ console.log(points)
           <hr></hr>
           <br></br>
           <h5>Graph</h5>
-          <Graph points={points}/>
+          <Graph points={points} interpolation={f_eq} data={data}/>
         </div>
       </div>
     )
