@@ -94,6 +94,7 @@ console.log(points)
     let x1 = points[0].x;
 
     let s = '((x-'+x0.toString()+')/'+data['diffX'].toString()+') ';
+    let s_d = '\\frac{x-'+x0.toString()+'}{'+data['diffX'].toString()+'} ';
     let partial_eq = '';
     let partial_pn = '';
     let degree = n-1;
@@ -101,11 +102,14 @@ console.log(points)
 
     for(let i=1; i<=degree; i++){ //generate co-efficient
         let num = '';
+        let num_d = '';
         let dnum = 1;
 
         for(let j=1; j<=i; j++){ //generate numerator
             let num_temp = '(' + s + ' - ' + (j-1).toString()+') ';
+            let num_temp_d = '(' + s_d + ' - ' + (j-1).toString()+') ';
             num = num + num_temp;
+            num_d = num_d + num_temp_d;
         }
         if(degree>1){
             dnum = factorial(i);
@@ -117,7 +121,8 @@ console.log(points)
         console.log("co ef: ")
         console.log(co_ef)
         partial_eq = partial_eq + ' + '  + co_ef.toString() + num;
-        partial_pn = partial_pn + ' + ((' + num +')/' + dnum.toString() + ') ('+diff.get([0,i]).toString()+') ';
+        //partial_pn = partial_pn + ' + ((' + num +')/' + dnum.toString() + ') ('+diff.get([0,i]).toString()+') ';
+        partial_pn = partial_pn + ' + \\frac{' + num_d +'}{' + dnum.toString() + '} ('+diff.get([0,i]).toString()+') ';
     }
     let f0 = points[0].y;
     let f_eq = f0.toString() + partial_eq;
@@ -125,7 +130,7 @@ console.log(points)
     console.log("Answer: ")
     console.log(pn)
     console.log("simplified: ")
-    let simplified = simplify(pn).toString();
+    let simplified = simplify(f_eq).toString();
     console.log(simplified)
 
     const re = /^[0-9\b]+$/;
@@ -210,7 +215,7 @@ console.log(points)
           <hr></hr>
           <br></br>
             <h5>Polynomial</h5>
-            <BlockMath math={f_eq} />
+            <BlockMath math={pn} />
             <br></br>
             <h5>Simplified Polynomial</h5>
             <BlockMath math={simplified} />
