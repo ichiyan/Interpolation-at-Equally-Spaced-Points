@@ -10,8 +10,7 @@ const Specification = ({}, ref) => {
                 <li>Inputs for the expression are valid so long as they are mathematical, the unknown variable is x and only x, and they follow 
                     <a href="https://mathjs.org/docs/expressions/syntax.html" target="_blank"> Math JS expression syntax</a>.
                 </li>
-                <li>Float precision...</li>
-                <li>Accuracy...</li>
+                <li>Accuracy: The computation is done with Number type variables, which is a floating point number. It has a limited precision of 64 bits [approx. 16 digits]. Values that exceed this limit will suffer from round-off errors during calculation.</li>
             </ul>
         </div>
     )
