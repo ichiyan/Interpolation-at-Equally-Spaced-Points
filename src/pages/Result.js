@@ -1,4 +1,4 @@
-import {React, useState} from "react";
+import {React, forwardRef} from "react";
 import Graph from "../components/Graph";
 import {simplify, parse, derivative, forEach, factorial, evaluate} from "mathjs";
 import {create, all } from 'mathjs';
@@ -27,7 +27,8 @@ const Result = ({data, method}) => {
   // calculator with input function
   if (method == 1){
       // console.log(data)
-     
+      // change to input expression
+      //var exp = "Math.sin(x)";
       var exp = data.expression;
       let last_x = 0;
 
@@ -117,9 +118,10 @@ console.log(points)
         partial_eq = partial_eq + ' + '  + co_ef.toString() + num;
     }
     let f0 = points[0].y;
-    var f_eq = f0.toString() + partial_eq;
+    let f_eq = f0.toString() + partial_eq;
     console.log("Answer: ")
     console.log(f_eq)
+    column_labels.push(data['numX'])
 
     return(
       <div>
@@ -164,33 +166,22 @@ console.log(points)
               }
             </tr>
           </thead>
-          <tbody>
-              {dummy.map((point, ndx) => {
-                return (
-                  <tr key={ndx}>
-                    <td>{point.x}</td>
-                    <td>{point.y}</td>
-                    <td>{point.dif1}</td>
-                    <td>{point.dif2}</td>
-                    <td>{point.dif3}</td>
-                    <td>{point.dif4}</td>
-                  </tr>
-                )
-              })}
-            </tbody>
             <tbody>
             {points.map((point, ndx) =>{
                 return(
                     <tr key={ndx}>
                         <td>{point.x}</td>
                         <td>{point.y}</td>
-                        <td>{point.dif1}</td>
-                        <td>{point.dif2}</td>
-                        <td>{point.dif3}</td>
-                        <td>{point.dif4}</td>
+                        {
+                            column_labels.map((col, i) => {
+                                if(i>0){
+                                    return(<th> {diff.get([ndx,i])} </th>)
+                                }
+                            })
+                        }
                     </tr>
                 )
-              })}
+            })}
             </tbody>
           </table>
           </div>
