@@ -21,7 +21,6 @@ const Result = ({data, method}) => {
 
   // calculator with input function
   if (method == 1){
-      // console.log(data)
       // change to input expression
       var exp = data.expression;
       let last_x = 0;
@@ -70,14 +69,14 @@ const Result = ({data, method}) => {
 
     diff.set([0,0],9)
 
-    console.log(diff)
-    console.log("diff ^")
-    console.log(diff.get([0,0]))
+    // console.log(diff)
+    // console.log("diff ^")
+    // console.log(diff.get([0,0]))
 
     for(let ndx=0; ndx<n; ndx++){
         diff.set([ndx, 0], points[ndx].y);
     }
-    console.log(diff)
+    // console.log(diff)
 
     for (let i=1; i<n; i++){
         for(let j = n-i; j>0; j--){
@@ -85,7 +84,7 @@ const Result = ({data, method}) => {
             diff.set([j-1, i], temp);
         }
     }
-    console.log(diff)
+    // console.log(diff)
 
     //interpolate
     let x0 = points[0].x;
@@ -96,7 +95,7 @@ const Result = ({data, method}) => {
     let partial_eq = '';
     let partial_pn = '';
     let degree = n-1;
-    console.log(s)
+    // console.log(s)
 
     for(let i=1; i<=degree; i++){ //generate co-efficient
         let num = '';
@@ -113,11 +112,11 @@ const Result = ({data, method}) => {
             dnum = factorial(i);
         }
         let co_ef = diff.get([0,i])/dnum;
-        console.log(diff.get([0,i]))
-        console.log(dnum)
-        console.log(n)
-        console.log("co ef: ")
-        console.log(co_ef)
+        // console.log(diff.get([0,i]))
+        // console.log(dnum)
+        // console.log(n)
+        // console.log("co ef: ")
+        // console.log(co_ef)
         partial_eq = partial_eq + ' + '  + co_ef.toString() + num;
         //partial_pn = partial_pn + ' + ((' + num +')/' + dnum.toString() + ') ('+diff.get([0,i]).toString()+') ';
         partial_pn = partial_pn + ' + \\frac{' + num_d +'}{' + dnum.toString() + '} ('+diff.get([0,i]).toString()+') ';
