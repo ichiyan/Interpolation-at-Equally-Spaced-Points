@@ -90,8 +90,8 @@ const Result = ({data, method}) => {
     let x0 = points[0].x;
     let x1 = points[0].x;
 
-    let s = '((x-'+x0.toString()+')/'+data['diffX'].toString()+') ';
-    let s_d = '\\frac{x-'+x0.toString()+'}{'+data['diffX'].toString()+'} ';
+    let s = '((x-'+x0.toString()+')/'+data['diffX'].toString()+')';
+    let s_d = '\\dfrac{x-'+x0.toString()+'}{'+data['diffX'].toString()+'} ';
     let partial_eq = '';
     let partial_pn = '';
     let degree = n-1;
@@ -119,7 +119,7 @@ const Result = ({data, method}) => {
         // console.log(co_ef)
         partial_eq = partial_eq + ' + '  + co_ef.toString() + num;
         //partial_pn = partial_pn + ' + ((' + num +')/' + dnum.toString() + ') ('+diff.get([0,i]).toString()+') ';
-        partial_pn = partial_pn + ' + \\frac{' + num_d +'}{' + dnum.toString() + '} ('+diff.get([0,i]).toString()+') ';
+        partial_pn = partial_pn + ' + \\dfrac{' + num_d +'}{' + dnum.toString() + '} ('+diff.get([0,i]).toString()+') ';
     }
     let f0 = points[0].y;
     let f_eq = f0.toString() + partial_eq;
@@ -211,11 +211,11 @@ const Result = ({data, method}) => {
           <br></br>
             <h5>Polynomial</h5>
             <br></br>
-            <span style={{display: "block", padding: "10px 0"}}><InlineMath math={pn}/></span>
+            <span style={{display: "block", padding: "10px 0", lineHeight: "50pt"}}><InlineMath math={pn}/></span>
             <br></br>
             <h5>Simplified Polynomial</h5>
             <br></br>
-            <span style={{display: "block", padding: "10px 0"}}><InlineMath math={simplified}/></span>
+            <span style={{display: "block", padding: "10px 0", lineHeight: "50pt"}}><InlineMath math={simplified}/></span>
         </div>
 
         {
