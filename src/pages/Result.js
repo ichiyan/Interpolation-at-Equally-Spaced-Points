@@ -2,6 +2,9 @@ import {React, forwardRef} from "react";
 import Graph from "../components/Graph";
 import {simplify, parse, derivative, forEach, factorial, evaluate} from "mathjs";
 import {create, all } from 'mathjs';
+import Equation from './Equation';
+import 'katex/dist/katex.min.css';
+import { InlineMath } from 'react-katex';
 
 const config = { };
 const math = create(all, config);
@@ -28,7 +31,6 @@ const Result = ({data, method}) => {
   if (method == 1){
       // console.log(data)
       // change to input expression
-      //var exp = "Math.sin(x)";
       var exp = data.expression;
       let last_x = 0;
 
@@ -62,8 +64,7 @@ const Result = ({data, method}) => {
       y: data['yValues'][count-1]
     })
   }
-console.log(points)
-  //calculate y
+
 
     function find_s(s, n){//calculates  s = (x-x0)/delta_x
         let temp_s = s;
@@ -121,7 +122,14 @@ console.log(points)
     let f_eq = f0.toString() + partial_eq;
     console.log("Answer: ")
     console.log(f_eq)
-    column_labels.push(data['numX'])
+
+    //calculate y
+    var inter_y = '';
+    var inter_x = '';
+    if(data['calculateY'].length >= 1){
+      inter_x = parseFloat(data['calculateY'])
+      inter_y = evaluate(f_eq, {x: inter_x})
+    }
 
     return(
       <div>
@@ -174,9 +182,7 @@ console.log(points)
                         <td>{point.y}</td>
                         {
                             column_labels.map((col, i) => {
-                                if(i>0){
-                                    return(<th> {diff.get([ndx,i])} </th>)
-                                }
+                                return(<td key={i}> {diff.get([ndx,i+1])} </td>)
                             })
                         }
                     </tr>
@@ -193,13 +199,18 @@ console.log(points)
             <h5>Polynomial</h5>
             <p></p>
         </div>
-
-        <div className="container mt-5">
-          <hr></hr>
-          <br></br>
-            <h5>Interpolated y-value at x=</h5>
-            <p></p>
-        </div>
+        
+        {
+          inter_y != '' && (
+            <div className="container mt-5">
+              <hr></hr>
+              <br></br>
+                <h5>Interpolated y-value at x = {inter_x}</h5>
+                <br></br>
+                {/* <p><InlineMath math={}></InlineMath></p> */}
+            </div>
+          )
+        }
 
         <div className="container mt-5">
           <hr></hr>
