@@ -135,20 +135,11 @@ console.log(points)
 
     const re = /^[0-9\b]+$/;
     let interpolate_f = null;
-    // let err = 0;
-    // let deriv = null;
     console.log(interpolate_f)
     console.log(data['calculateY'])
     if(data['calculateY'] != null){
         const scope = {x:data['calculateY']};
         interpolate_f = math.evaluate(f_eq, scope);
-        // deriv = math.derivative(exp, 'x');
-        // // for(let nx=2; nx<=degree; nx++){
-        //     deriv = math.derivative(deriv, 'x');
-        // // }
-        // console.log(deriv.toString())
-        // let actual = math.evaluate(deriv.toString(), scope);
-        // err = math.abs(actual-interpolate_f);
     }
     console.log("pnx: ")
     console.log(interpolate_f)
