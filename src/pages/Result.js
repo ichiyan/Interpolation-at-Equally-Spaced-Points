@@ -2,6 +2,9 @@ import {React, forwardRef} from "react";
 import Graph from "../components/Graph";
 import {simplify, parse, derivative, forEach, factorial, evaluate} from "mathjs";
 import {create, all } from 'mathjs';
+import 'katex/dist/katex.min.css';
+import { BlockMath } from 'react-katex';
+import Equation from './Equation';
 
 const config = { };
 const math = create(all, config);
@@ -15,14 +18,6 @@ const Result = ({data, method}) => {
   let diff = math.matrix();
 
   diff.resize([(data.numX), (data.numX)]);
-
-  const dummy = [
-    {x: 0.0, y: 0.000, dif1: 1.015, dif2: 0.2124999999999999, dif3: 0.5000000000000032, dif4:0.5208333333333183},
-    {x: 0.2, y: 0.203, dif1: 1.0999999999999999, dif2: 0.5125000000000018, dif3: 0.9166666666666579	},
-    {x: 0.4, y: 0.423, dif1: 1.3050000000000006, dif2: 1.0624999999999967},
-    {x: 0.6, y: 0.684, dif1: 1.7299999999999993},
-    {x: 0.8, y: 1.030},
-  ];
 
   // calculator with input function
   if (method == 1){
@@ -215,10 +210,10 @@ console.log(points)
           <hr></hr>
           <br></br>
             <h5>Polynomial</h5>
-            <p>{f_eq}</p>
+            <BlockMath math={f_eq} />
             <br></br>
             <h5>Simplified Polynomial</h5>
-            <p>{simplified}</p>
+            <BlockMath math={simplified} />
         </div>
 
         <div className="container mt-5">
