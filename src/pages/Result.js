@@ -1,9 +1,9 @@
-import {React, forwardRef} from "react";
+import {React} from "react";
 import Graph from "../components/Graph";
-import {simplify, parse, derivative, forEach, factorial, evaluate} from "mathjs";
+import {simplify, factorial, evaluate} from "mathjs";
 import {create, all } from 'mathjs';
 import 'katex/dist/katex.min.css';
-import { BlockMath } from 'react-katex';
+import { InlineMath } from 'react-katex';
 import Equation from './Equation';
 
 const config = { };
@@ -23,7 +23,6 @@ const Result = ({data, method}) => {
   if (method == 1){
       // console.log(data)
       // change to input expression
-      //var exp = "Math.sin(x)";
       var exp = data.expression;
       let last_x = 0;
 
@@ -57,8 +56,7 @@ const Result = ({data, method}) => {
       y: data['yValues'][count-1]
     })
   }
-console.log(points)
-  //calculate y
+
 
     function find_s(s, n){//calculates  s = (x-x0)/delta_x
         let temp_s = s;
@@ -126,25 +124,22 @@ console.log(points)
     }
     let f0 = points[0].y;
     let f_eq = f0.toString() + partial_eq;
-    let pn = f0.toString() + partial_pn;
+    let pn = 'P_' + column_labels[column_labels.length - 1] + '(x) = ' + f0.toString() + partial_pn;
     console.log("Answer: ")
     console.log(pn)
     console.log("simplified: ")
-    let simplified = simplify(f_eq).toString();
+    let simplified = 'P_' + column_labels[column_labels.length - 1] + '(x) = ' + simplify(f_eq).toString();
     console.log(simplified)
 
-    const re = /^[0-9\b]+$/;
-    let interpolate_f = null;
-    console.log(interpolate_f)
-    console.log(data['calculateY'])
-    if(data['calculateY'] != null){
-        const scope = {x:data['calculateY']};
-        interpolate_f = math.evaluate(f_eq, scope);
+    //calculate y
+    var interY = '';
+    var interX = '';
+    var interYString;
+    if(data['calculateY'].length >= 1){
+      interX = parseFloat(data['calculateY'])
+      interY = evaluate(f_eq, {x: interX})
+      interYString = "f(" + interX.toString() + ")" + " = " + interY.toString()
     }
-    console.log("pnx: ")
-    console.log(interpolate_f)
-
-    column_labels.push(data['numX'])
 
     return(
       <div>
@@ -197,9 +192,7 @@ console.log(points)
                         <td>{point.y}</td>
                         {
                             column_labels.map((col, i) => {
-                                if(i>0){
-                                    return(<th> {diff.get([ndx,i])} </th>)
-                                }
+                                return(<td key={i}> {diff.get([ndx,i+1])} </td>)
                             })
                         }
                     </tr>
@@ -214,18 +207,25 @@ console.log(points)
           <hr></hr>
           <br></br>
             <h5>Polynomial</h5>
-            <BlockMath math={pn} />
+            <br></br>
+            <span style={{display: "block", padding: "10px 0"}}><InlineMath math={pn}/></span>
             <br></br>
             <h5>Simplified Polynomial</h5>
-            <BlockMath math={simplified} />
+            <br></br>
+            <span style={{display: "block", padding: "10px 0"}}><InlineMath math={simplified}/></span>
         </div>
 
-        <div className="container mt-5">
-          <hr></hr>
-          <br></br>
-            <h5>Interpolated y-value at x= {data['calculateY']}</h5>
-            <p>{interpolate_f}</p>
-        </div>
+        {
+          interY != '' && (
+            <div className="container mt-5">
+              <hr></hr>
+              <br></br>
+                <h5>Interpolated y-value at x = {interX}</h5>
+                <br></br>
+                <span style={{display: "block", padding: "10px 0"}}><InlineMath math={interYString}/></span>
+            </div>
+          )
+        }
 
         <div className="container mt-5">
           <hr></hr>

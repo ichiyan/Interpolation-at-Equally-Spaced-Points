@@ -127,7 +127,7 @@ const Introduction = ({}, ref) => {
                 <BlockMath math={equation8} />    
                 <BlockMath math={equation9} />    
 
-                <p>Solving all the three equations together we get <Equation math= "a = -4, \ b = 15/2, \ c = -3/2" />
+                <p>Solving all the three equations together we get <Equation math= "a = -3/2, \ b = 15/2, \ c = -4" />
                     .</p>
                 <p>In this example we say that <Equation math= " f" /> interpolates the three points <Equation math= "(1,2), \ (2,5) \ " />and 
                 <Equation math= " \ (4,2)" />
@@ -135,9 +135,9 @@ const Introduction = ({}, ref) => {
                 <p>We also call <Equation math= " f" /> an interpolating polynomial for this set of 3 points.</p>
                 <p>Here we see that there is exactly one polynomial of degree 2 that interpolates these 3 points. A polynomial of degree 2 has <Equation math= "2+1=3 \ " />
                      unknown coefficients, <Equation math= "a, \ b \ " />and <Equation math= "c\ " />.</p>
-                <p> We solved for these from the 3 equations. This can be generalized to the following result:</p>
-                <BlockMath math={`f(x) = -4x^2 + \\frac{{15}}{{2}}x + \\frac{{-3}}{{2}}`} />
-                
+                <p> We solved for these from the 3 equations. Thus,</p>
+                <BlockMath math={`f(x) = -\\frac{{3}}{{2}}x^2 + \\frac{{15}}{{2}}x -4 `} />.
+                <p>This can be generalized to the following theorem:</p>
                 <br/>
 
                 <b>Theorem</b>

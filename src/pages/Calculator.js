@@ -41,7 +41,8 @@ const Calculator = ({}, ref) => {
                         initX: parseFloat(inputs['initX']),
                         numX: parseInt(inputs['numX']),
                         diffX: parseFloat(inputs['diffX']),
-                        calculateY: parseFloat(inputs['calculateY']),
+                        // parse calculateY after checking length (see Result component)
+                        calculateY: inputs['calculateY'],
                         expression: inputs['expression'],
                     });
                     setMethod(1);
@@ -68,7 +69,8 @@ const Calculator = ({}, ref) => {
                     initX: parseFloat(inputs['initX']),
                     numX: parseInt(inputs['numX']),
                     diffX: parseFloat(inputs['diffX']),
-                    calculateY: parseFloat(inputs['calculateY']),                   
+                    // parse calculateY after checking length (see Result component)
+                    calculateY: inputs['calculateY'],                   
                     yValues: yValues,
                 })
                 setMethod(2);

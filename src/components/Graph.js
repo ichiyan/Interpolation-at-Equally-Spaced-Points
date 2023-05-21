@@ -24,14 +24,6 @@ const Graph = ({points, interpolation, data}) => {
     }
 
 
-    console.log("graph")
-    // console.log(xValues)
-    // console.log(yValues)
-    console.log(interpolation)
-    console.log(evaluate(
-        "4 + 1(((x-1)/1)  - 0)  + 0(((x-1)/1)  - 0) (((x-1)/1)  - 1)  + 0(((x-1)/1)  - 0) (((x-1)/1)  - 1) (((x-1)/1)  - 2)  + 0(((x-1)/1)  - 0) (((x-1)/1)  - 1) (((x-1)/1)  - 2) (((x-1)/1)  - 3) ", 
-        {x:3}))
-
     return(
         <Plot
             data={[
@@ -39,7 +31,7 @@ const Graph = ({points, interpolation, data}) => {
                     x: xValues,
                     y: yValues,
                     mode: 'lines',
-                    marker: {color: '#6495ED', size: 20},
+                    marker: {color: '#6495ED'},
                     name: "interpolation polynomial"
                 },
                 {
@@ -47,7 +39,7 @@ const Graph = ({points, interpolation, data}) => {
                     y: inputYValues,
                     type: 'scatter',
                     mode: 'markers',
-                    marker: {color: '#ff4716'},
+                    marker: {color: '#ff4716', size: 7},
                     name: "data points"
                 },
             ]}
