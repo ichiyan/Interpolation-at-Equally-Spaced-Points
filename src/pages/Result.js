@@ -100,6 +100,7 @@ console.log(points)
 
     let s = '((x-'+x0.toString()+')/'+data['diffX'].toString()+') ';
     let partial_eq = '';
+    let partial_pn = '';
     let degree = n-1;
     console.log(s)
 
@@ -121,11 +122,16 @@ console.log(points)
         console.log("co ef: ")
         console.log(co_ef)
         partial_eq = partial_eq + ' + '  + co_ef.toString() + num;
+        partial_pn = partial_pn + ' + ((' + num +')/' + dnum.toString() + ') ('+diff.get([0,i]).toString()+') ';
     }
     let f0 = points[0].y;
     let f_eq = f0.toString() + partial_eq;
+    let pn = f0.toString() + partial_pn;
     console.log("Answer: ")
-    console.log(f_eq)
+    console.log(pn)
+    console.log("simplified: ")
+    let simplified = simplify(pn).toString();
+    console.log(simplified)
 
     const re = /^[0-9\b]+$/;
     let interpolate_f = null;
@@ -210,6 +216,9 @@ console.log(points)
           <br></br>
             <h5>Polynomial</h5>
             <p>{f_eq}</p>
+            <br></br>
+            <h5>Simplified Polynomial</h5>
+            <p>{simplified}</p>
         </div>
 
         <div className="container mt-5">
