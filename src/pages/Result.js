@@ -147,6 +147,7 @@ const Result = ({data, method}) => {
           <hr></hr>
           <br></br>
           <h5>Points</h5>
+          <br></br>
           <table className="table text-center table-striped">
             <thead>
               <tr>
@@ -171,6 +172,7 @@ const Result = ({data, method}) => {
         <hr></hr>
         <br></br>
         <h5>Interpolation Table</h5>
+        <br></br>
         <div className="table-responsive">
         <table className="table text-center table-striped ">
           <thead>

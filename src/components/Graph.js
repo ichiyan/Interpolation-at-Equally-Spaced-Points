@@ -1,25 +1,23 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
 import {evaluate} from "mathjs";
+import "@stdlib/array-linspace";
 
 const Graph = ({points, interpolation, data}) => {
 
+    // interpolation polynomial
+    var linspace = require( '@stdlib/array-linspace' );
+    var xValues = linspace(points[0].x, points[points.length - 1].x, data['numX'] + 50)
+    var yValues = [];
 
     var inputXValues = [];
     var inputYValues = [];
-
-    // interpolation polynomial
-    var xValues = [];
-    var yValues = [];
-
     points.map((point) => {
         inputXValues.push(point.x);
         inputYValues.push(point.y)
-
-        xValues.push(point.x)
     })
 
-    for(var ndx = 0; ndx < data['numX']; ndx++){
+    for(var ndx = 0; ndx < xValues.length; ndx++){
         yValues.push(evaluate(interpolation, {x: xValues[ndx]}))
     }
 
