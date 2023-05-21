@@ -215,7 +215,7 @@ const Result = ({data, method}) => {
             <br></br>
             <h5>Simplified Polynomial</h5>
             <br></br>
-            <span style={{display: "block", padding: "10px 0", lineHeight: "50pt"}}><InlineMath math={simplified}/></span>
+            <span style={{display: "block", padding: "10px 0", lineHeight: "30pt"}}><InlineMath math={simplified}/></span>
         </div>
 
         {
