@@ -194,7 +194,9 @@ const Result = ({data, method}) => {
                         <td>{point.y}</td>
                         {
                             column_labels.map((col, i) => {
+                              if(i+1 < data['numX'] - ndx){
                                 return(<td key={i}> {diff.get([ndx,i+1])} </td>)
+                              }
                             })
                         }
                     </tr>
